@@ -1,31 +1,23 @@
 package kpi.iasa;
 
-public class LUParallel implements Runnable {
+import java.lang.reflect.Array;
+
+public class LUConsistent {
 
     private double [][]A;
-    private double [][]L;
+    private  double [][]L;
     private double [][]U;
     private int n;
-    private int threadNumber;
-    private int numberOfThreads;
-
-    public LUParallel(double [][]A,double [][]L,double [][]U,int size,int threadNumber,int numberOfThreads)
-    {
-        this.A=A;
-        this.L=L;
-        this.U=U;
-        n=size;
-        this.threadNumber=threadNumber;
-        this.numberOfThreads=numberOfThreads;
-    }
-    @Override
-    public void run() {
-        LU();
+    public LUConsistent( double [][]a,double[][] l, double[][] u, int n) {
+        A=a;
+        L = l;
+        U = u;
+        this.n = n;
     }
 
-    public void LU()
-    {
-        for (int i = threadNumber; i < n; i+=numberOfThreads) {
+
+    public void LU2(){
+        for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 U[0][i] =A[0][i];
                 L[i][0] =A[i][0] /U[0] [0];
@@ -46,4 +38,5 @@ public class LUParallel implements Runnable {
             }
         }
     }
+
 }
